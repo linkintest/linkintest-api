@@ -1,15 +1,20 @@
-### **Linkin Test API Doc**
+### **Linkin Test API Document**
+
+[![alt text](https://images.gitee.com/uploads/images/2021/0508/154417_7e50761e_9074351.jpeg)](http://linkintest.com)
 
 ### Product introduction
 
 ```java
-Linkintest is an advanced verification tool mainly for CPI Campaigns. You can check out the status of target campaigns and then stop wasting clicks on non-working campaigns. It also allows you to see how many competitors are involved so as to make a decision. 
+Linkintest is an advanced verification tool mainly for CPI Campaigns. 
+You can check out the status of target campaigns and then stop wasting clicks on non-working campaigns. 
+It also allows you to see how many competitors are involved so as to make a decision. 
 ```
 
 ### Authentication
 
 ```java
-There is one authentication methods for the API: HTTP Basic authentication . The easiest way to authenticate is using HTTP Basic authentication.
+There is one authentication methods for the API: HTTP Basic authentication .
+The easiest way to authenticate is using HTTP Basic authentication.
 Enter Api Name as your username and supply your API Key as the password.
 ```
 
@@ -116,7 +121,7 @@ body:
 
 **Fill in the request body information**
 
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0508/114525_0762ac29_9074351.png "image-20210508102135804.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0508/151419_bfcb43bf_9074351.jpeg "Dingtalk_20210508151245.jpg")
 
 **Authentication information can also be accessed through the header mode**
 
@@ -128,6 +133,9 @@ body:
 
 ```java
 public class LinkinTestRequestDemo {
+    /**
+    please input USERNAME、PASSWORD、BODY
+    /**
     public static final String URL = "http://api.linkintest.com/detector/url";
     public static final String REQUEST_METHOD = "POST";
     public static final String USERNAME = "your username";
@@ -158,3 +166,33 @@ public class LinkinTestRequestDemo {
 }
 ```
 
+#### PHP
+
+```php
+<?php
+    //please input $userName、$password、$body 
+    $url = "http://api.linkintest.com/detector/url";
+    $userName = "username";
+    $password = "password";
+    $token = base64_encode("$userName:$password");
+    $crl = curl_init();
+    $header = array(
+        "Content-Type: application/json",
+        "Authorization: Basic ".$token,
+    );
+    $body = array(
+        "appId" => "id1234567",
+        "countryCode" => "94",
+        "os" => "iOS",
+        "previewLink" => "https://www.baidu.com",
+        "testLink" => "http://www.baidu.com",
+    );
+    $postBody = json_encode($body);
+    curl_setopt($crl, CURLOPT_URL, $url);
+    curl_setopt($crl, CURLOPT_POST, true); 
+    curl_setopt($crl, CURLOPT_HTTPHEADER, $header);
+    curl_setopt($crl, CURLOPT_POSTFIELDS, $postBody);
+    $rest = curl_exec($crl);
+    curl_close($crl);
+?>
+```
